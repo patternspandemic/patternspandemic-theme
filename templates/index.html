@@ -1,6 +1,8 @@
         {% extends "base.html" %}
         {% block content %}
             <section id="articles">
+                {% block content_title %}
+                {% endblock %}
                 <ul id="article-list">
                     {% for article in articles_page.object_list %}
                     <li>

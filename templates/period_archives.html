@@ -1,11 +1,24 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>Archives for {{ period | reverse | join(' ') }}</h1>
-
-<dl>
-{% for article in dates %}
-    <dt>{{ article.locale_date }}</dt>
-    <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
-{% endfor %}
-</dl>
-{% endblock %}
+        {% extends "base.html" %}
+        {% block title %}{{ SITENAME }} - {{ period | reverse | join(' ') }} Archives{% endblock %}
+        {% block content %}
+            <section id="archives">
+                <h2>{{ period | reverse | join(' ') }} Archives</h2>
+                <ul id="article-list">
+                    {% for article in dates %}
+                    <li>
+                        <article>
+                            <header>
+                                <h2 class="article-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
+                            </header>
+                            <footer class="article-info">
+                                <abbr class="article-published" title="{{ article.date.isoformat() }}"> {{ article.date|strftime('%B %-d, %Y') }} </abbr>
+                            </footer>
+                            <div class="article-summary">
+                                {{ article.summary }}
+                            </div>
+                        </article>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endblock content %}

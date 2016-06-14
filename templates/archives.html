@@ -1,11 +1,25 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>Archives for {{ SITENAME }}</h1>
-
-<dl>
-{% for article in dates %}
-    <dt>{{ article.locale_date }}</dt>
-    <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
-{% endfor %}
-</dl>
-{% endblock %}
+        {% extends "base.html" %}
+        {% block title %}{{ SITENAME }} - Archives{% endblock %}
+        {% block content %}
+        {% set month_names = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] %}
+            <section id="archives">
+                <h2>Archives</h2>
+                <ul id="archives-list">
+                {% for year in articles|groupby('date.year') %}
+                    <li>{{ year.grouper }}
+                        <ul>
+                        {% for month in year.list|groupby('date.month') %}
+                            <li><a href="{{ SITEURL }}/{{ year.grouper }}/{{ month.grouper }}/">{{ month_names[month.grouper] }}</a>
+                                <ul>
+                                {% for article in month.list %}
+                                    <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+                                {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+                </ul>
+            </section>
+        {% endblock content %}
