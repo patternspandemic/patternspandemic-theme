@@ -6,7 +6,6 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         {% if FEED_ALL_ATOM %}
         <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed">
         {% endif %}
@@ -25,7 +24,6 @@
         {% if TAG_FEED_RSS and tag %}
         <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(tag.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed">
         {% endif %}
-
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/normalize.css">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.css">
         <script src="{{ SITEURL }}/theme/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -36,9 +34,11 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <header id="sitehead">
-            <h1><a href="{{ SITEURL }}/">{{ SITENAME }} <strong>{{ SITESUBTITLE }}</strong></a></h1>
+            <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+            {% if SITESUBTITLE %}
+            <h2><a href="{{ SITEURL }}/{{ SITESUBURL }}/">{{ SITESUBTITLE }}</a></h2>
+            {% endif %}
         </header>
-
         <nav id="sitemenu">
             <ul>
             {% for title, link in MENUITEMS %}
@@ -51,12 +51,10 @@
             {% endif %}
             </ul>
         </nav>
-
         <div id="sitecontent" role="main">
         {% block content %}
         {% endblock content %}
         </div>
-
         <aside id="siteside">
             <section id="about">
                 <h3>About</h3>
@@ -71,11 +69,9 @@
                 <p>Some pinned tags and a link to all tags.</p>
             </section>
         </aside>
-
         <footer id="sitefoot">
             <address></address>
         </footer>
-
         {% block scripts %}
         <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{ SITEURL }}/theme/js/vendor/jquery-1.12.2.min.js"><\/script>')</script>
