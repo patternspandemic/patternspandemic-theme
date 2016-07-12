@@ -8,14 +8,17 @@
                     <li>
                         <article>
                             <header>
-                                <h2 class="article-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
+                                <h2 class="article-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"><span> {{ article.title|replace(" ", " </span> <span> ") }} </span></a></h2>
                             </header>
-                            <footer class="article-info">
-                                <abbr class="article-published" title="{{ article.date.isoformat() }}"> {{ article.date|strftime('%B %-d, %Y') }} </abbr>
-                            </footer>
                             <div class="article-summary">
                                 {{ article.summary }}
                             </div>
+                            <figure class="article-key-image" style="background-image: url({{ article.key_image }})">
+                                <img src="{{ article.key_image }}" alt="{{ article.key_image_alt }}">
+                            </figure>
+                            <footer class="article-info">
+                                <abbr class="article-published" title="{{ article.date.isoformat() }}"> {{ article.date|strftime('%B %Y') }} </abbr>
+                            </footer>
                         </article>
                     </li>
                     {% endfor %}
