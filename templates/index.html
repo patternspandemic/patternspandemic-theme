@@ -3,6 +3,11 @@
             <section id="articles">
                 {% block content_title %}
                 {% endblock %}
+                {% if articles_page.has_other_pages() and articles_page.has_previous() %}
+                <p class="paginator">
+                    <a href="{{ SITEURL }}/{{ articles_previous_page.url }}">newer</a>
+                </p>
+                {% endif %}
                 <ul id="article-list">
                     {% for article in articles_page.object_list %}
                     <li>
@@ -23,8 +28,10 @@
                     </li>
                     {% endfor %}
                 </ul>
-                {% if articles_page.has_other_pages() %}
-                    {% include 'pagination.html' %}
+                {% if articles_page.has_other_pages() and articles_page.has_next() %}
+                <p class="paginator">
+                    <a href="{{ SITEURL }}/{{ articles_next_page.url }}">older</a>
+                </p>
                 {% endif %}
             </section>
         {% endblock content %}
