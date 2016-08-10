@@ -60,19 +60,22 @@
         <aside id="siteside">
             <section id="about">
                 <h3>About</h3>
-                <p>Me, and stuff.</p>
+                {% for bit in ABOUT %}
+                <p>{{ bit }}</p>
+                {% endfor %}
             </section>
             <section id="projects">
                 <h3>Projects</h3>
-                <p>Some projects I've worked on, link to GitHub.</p>
-            </section>
-            <section id="tags">
-                <h3>Tags</h3>
-                <p>Some pinned tags and a link to all tags.</p>
+                <p>Here are some things I've made.</p>
+                <ul>
+                {% for proj, link in PROJECTS %}
+                    <li><a href="{{ SITEURL }}/{{ link }}">{{ proj }}</a></li>
+                {% endfor %}
+                </ul>
             </section>
         </aside>
         <footer id="sitefoot">
-            <address></address>
+            Copyright &copy; {{ BUILD_DATETIME|strftime('%Y ') ~ AUTHOR }}
         </footer>
         {% block scripts %}
         <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
