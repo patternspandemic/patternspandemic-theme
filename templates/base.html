@@ -26,6 +26,7 @@
         {% endif %}
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/normalize.css">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/font.css">
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.css">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/site.css">
         <script src="{{ SITEURL }}/theme/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -60,16 +61,28 @@
         <aside id="siteside">
             <section id="about">
                 <h3>About</h3>
-                {% for bit in ABOUT %}
-                <p>{{ bit }}</p>
+                {% for blurb in ABOUT %}
+                <p>{{ blurb }}</p>
                 {% endfor %}
+                <ul id="social">
+                {% for url, cls, icon in SOCIALITEMS %}
+                    <li><a href="{{ url }}" class="{{ cls }}"><i class="fa fa-{{ icon }} fa-fw"></i></a></li>
+                {% endfor %}
+                </ul>
             </section>
             <section id="projects">
                 <h3>Projects</h3>
-                <p>Here are some things I've made.</p>
                 <ul>
-                {% for proj, link in PROJECTS %}
+                {% for proj, link, desc in PROJECTS %}
                     <li><a href="{{ SITEURL }}/{{ link }}">{{ proj }}</a></li>
+                {% endfor %}
+                </ul>
+            </section>
+            <section id="pages">
+                <h3>Pages</h3>
+                <ul>
+                {% for page, link in PAGES %}
+                    <li><a href="{{ SITEURL }}/{{ link }}">{{ page }}</a></li>
                 {% endfor %}
                 </ul>
             </section>
